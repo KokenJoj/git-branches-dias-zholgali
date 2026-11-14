@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GreenWeekend — Project Charter (Week 1)</title>
+  <style>
+    @page { margin: 18mm; }
+    body {
+      font-family: "Segoe UI", Calibri, Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.45;
+      color: #1a1a1a;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1 { font-size: 18pt; margin-bottom: 4px; }
+    h2 { font-size: 13pt; margin-top: 1.2em; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+    .meta { color: #444; font-size: 10pt; margin-bottom: 1.2em; }
+    table { border-collapse: collapse; width: 100%; font-size: 10pt; margin: 8px 0; }
+    th, td { border: 1px solid #bbb; padding: 6px 8px; vertical-align: top; text-align: left; }
+    th { background: #f0f4f0; }
+    strong.formula { display: block; margin: 8px 0; padding: 8px 10px; background: #f5f8f5; border-left: 3px solid #2d6a4f; }
+    ol { margin: 6px 0; padding-left: 1.3em; }
+    @media print {
+      body { padding: 0; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Project Charter — GreenWeekend</h1>
+  <p class="meta">
+    <strong>Smart Greenhouse · Week 1 · Idea and Team</strong><br />
+    Repository: <em>(paste GitHub link after creating the repo)</em><br />
+    Document version: 1.0 · November 2026
+  </p>
+
+  <h2>1. App name and one-sentence description</h2>
+  <p><strong>Name:</strong> GreenWeekend</p>
+  <p><strong>Description:</strong> GreenWeekend helps weekend dacha owners keep their greenhouse healthy between Friday and Sunday visits.</p>
+
+  <h2>2. Target user</h2>
+  <p>
+    Our primary user is a family that keeps a small vegetable greenhouse at a dacha (for example near a city in Kazakhstan)
+    and lives in the city during the work week. They usually drive to the dacha only on Friday evening or Saturday morning
+    and leave again on Sunday. Midweek they cannot check soil moisture, temperature, or whether ventilation was left open after a hot day.
+  </p>
+  <p>
+    Their main problems are realistic and repeated: plants dry out or overheat between visits; someone forgets to turn
+    irrigation or lighting off before leaving; they only discover damage on the next weekend; they do not want complex farm
+    software — they need a simple phone app that shows “is everything OK?” and can act while they are away.
+    Secondary users are other family members who share the same greenhouse account on their phones.
+  </p>
+
+  <h2>3. Own extra feature</h2>
+  <p><strong>Away Plan (План отсутствия)</strong></p>
+  <p class="formula">
+    Our app can build a short “away” plan for N days (tighten thresholds, force automatic mode, and show a return summary)
+    because our user leaves the greenhouse unattended from Monday to Friday and needs the app to watch it without daily manual control.
+  </p>
+  <p>How it works (buildable in 6 weeks, mobile-only):</p>
+  <ol>
+    <li>User opens Away Plan and chooses return date (or “until Sunday”).</li>
+    <li>App switches to automatic mode and applies slightly stricter thresholds for soil moisture and temperature.</li>
+    <li>While away, normal automation and alerts run.</li>
+    <li>On return, a one-screen summary lists important alerts and how many times irrigation / ventilation turned on.</li>
+  </ol>
+  <p>This is <strong>not</strong> a copy of required modules M4/M5: it is a guided weekend workflow on top of them.</p>
+
+  <h2>4. Direction (track)</h2>
+  <ol>
+    <li><strong>Beginner-friendly UX for non-farmers</strong> — large status on the dashboard, plain language, minimal steps to start Away Plan.</li>
+    <li><strong>Water-conscious automation</strong> — irrigation rules and Away Plan thresholds water only when soil is low.</li>
+  </ol>
+  <p><em>If your brief uses different track names in section 4, map these two ideas to the closest official labels before defense.</em></p>
+
+  <h2>5. Feature list — M1–M8</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Module</th><th>How it works in GreenWeekend</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>M1</td><td>Login</td><td>Email/password via Firebase Auth; logout; wrong password shows an error; each account sees only their greenhouse.</td></tr>
+      <tr><td>M2</td><td>Dashboard</td><td>Air temperature, air humidity, soil moisture, light, last update time; live refresh from Firebase.</td></tr>
+      <tr><td>M3</td><td>Control</td><td>Irrigation, ventilation, lighting; tap writes on/off to Firebase; UI confirms new state.</td></tr>
+      <tr><td>M4</td><td>Modes</td><td>Manual / automatic; e.g. soil below threshold → irrigation on.</td></tr>
+      <tr><td>M5</td><td>Alerts</td><td>In-app alert when a value leaves the allowed range; tap opens the right screen.</td></tr>
+      <tr><td>M6</td><td>History</td><td>Charts for ≥2 parameters; day / week period.</td></tr>
+      <tr><td>M7</td><td>Settings</td><td>Thresholds, schedule, units; automation and Away Plan use saved values.</td></tr>
+      <tr><td>M8</td><td>No internet</td><td>Clear “no connection” message; no crash; recovers when online.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6. Team setup</h2>
+  <ul>
+    <li>GitHub repository created for the project.</li>
+    <li>All team members added as collaborators.</li>
+    <li>README lists names and roles (who designs, who codes what).</li>
+  </ul>
+
+  <h2>7. Out of scope</h2>
+  <p>No physical sensors or extra desktop programs. Data is test data in Firebase/Supabase, edited in the console for demos.</p>
+
+  <p style="margin-top:2em; font-size:9pt; color:#666;">
+    Tip: open this file in Chrome → Print → Save as PDF (1–2 pages).
+  </p>
+</body>
+</html>
