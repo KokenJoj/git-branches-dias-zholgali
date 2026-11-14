@@ -8,9 +8,9 @@
 
 | Name | Role |
 |------|------|
-| Zholgali Dias | Team lead · Data / Firebase |
-| Basiev David | App · Control & automation |
-| Umbetalieva Adelya | Design · UI |
+| Zholgali Dias | Team lead · App / Control & automation |
+| Basiev David | Design · UI |
+| Umbetalieva Adelya | Data / Firebase |
 | Marat Gaukhar | Extra feature · History & docs |
 
 ---

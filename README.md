@@ -10,9 +10,9 @@ Mobile app only (no hardware). Greenhouse readings live in Firebase; test values
 
 | Name | GitHub | Role | Responsibility |
 |------|--------|------|----------------|
-| Zholgali Dias | _add username_ | Team lead · Data / Firebase | Charter, database schema, auth, live readings, settings |
-| Basiev David | _add username_ | App · Control & automation | Navigation, device control (M3), modes (M4), offline (M8) |
-| Umbetalieva Adelya | _add username_ | Design · UI | Figma, logo, colors, fonts, screens match mockups |
+| Zholgali Dias | _add username_ | Team lead · App / Control & automation | Charter, navigation, device control (M3), modes (M4), offline (M8) |
+| Basiev David | _add username_ | Design · UI | Figma, logo, colors, fonts, screens match mockups |
+| Umbetalieva Adelya | _add username_ | Data / Firebase | Database schema, auth, live readings, settings (M1, M2, M7) |
 | Marat Gaukhar | _add username_ | Extra feature · History & docs | Plant Guide, charts (M6), alerts (M5), README, video, presentation |
 
 > Add every member as a collaborator on this repository. Fill GitHub usernames before the defense.

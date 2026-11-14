@@ -36,9 +36,9 @@ Speak this order. Keep answers short.
 
 | Who | Role |
 |-----|------|
-| Zholgali Dias | Lead · Firebase / data |
-| Basiev David | Control & automation |
-| Umbetalieva Adelya | Design / Figma |
+| Zholgali Dias | Lead · Control & automation |
+| Basiev David | Design / Figma |
+| Umbetalieva Adelya | Data / Firebase |
 | Marat Gaukhar | Plant Guide, charts, docs |
 
 ---
