@@ -2,115 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>GreenWeekend — Project Charter (Week 1)</title>
+  <title>GreenWeekend — Project Charter</title>
   <style>
-    @page { margin: 16mm; }
     body {
-      font-family: "Segoe UI", Calibri, Arial, sans-serif;
-      font-size: 10.5pt;
+      font-family: Calibri, Arial, sans-serif;
+      font-size: 11pt;
       line-height: 1.4;
-      color: #1a1a1a;
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 20px;
+      max-width: 700px;
+      margin: 24px auto;
+      padding: 0 16px;
+      color: #000;
     }
-    h1 { font-size: 17pt; margin-bottom: 4px; }
-    h2 { font-size: 12pt; margin-top: 1em; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
-    .meta { color: #444; font-size: 9.5pt; margin-bottom: 1em; }
-    table { border-collapse: collapse; width: 100%; font-size: 9.5pt; margin: 6px 0; }
-    th, td { border: 1px solid #bbb; padding: 5px 7px; vertical-align: top; text-align: left; }
-    th { background: #f0f4f0; }
-    strong.formula { display: block; margin: 6px 0; padding: 7px 9px; background: #f5f8f5; border-left: 3px solid #2d6a4f; }
-    ol, ul { margin: 4px 0; padding-left: 1.25em; }
+    h1 { font-size: 16pt; margin-bottom: 4px; }
+    h2 { font-size: 13pt; margin-top: 18px; margin-bottom: 6px; }
+    p, li { margin: 6px 0; }
+    table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 11pt; }
+    th, td { border: 1px solid #333; padding: 5px 8px; text-align: left; }
+    .sub { color: #333; margin-bottom: 14px; }
     @media print {
-      body { padding: 0; }
-      a { color: inherit; text-decoration: none; }
+      body { margin: 0; max-width: none; }
     }
   </style>
 </head>
 <body>
-  <h1>Project Charter — GreenWeekend</h1>
-  <p class="meta">
-    <strong>Smart Greenhouse · Week 1 · Idea and Team</strong><br />
-    Repository: <em>(paste GitHub link after creating the repo)</em><br />
-    Document version: 1.1 · November 2026
-  </p>
 
-  <table>
-    <thead><tr><th>Name</th><th>Role</th></tr></thead>
-    <tbody>
-      <tr><td>Zholgali Dias</td><td>Team lead · App / Control &amp; automation</td></tr>
-      <tr><td>Basiev David</td><td>Design · UI</td></tr>
-      <tr><td>Umbetalieva Adelya</td><td>Data / Firebase</td></tr>
-      <tr><td>Marat Gaukhar</td><td>Extra feature · History &amp; docs</td></tr>
-    </tbody>
-  </table>
+<h1>Project Charter — GreenWeekend</h1>
+<p class="sub">Smart Greenhouse, Week 1</p>
+<p>
+  <strong>Team:</strong> Zholgali Dias, Basiev David, Umbetalieva Adelya, Marat Gaukhar<br />
+  <strong>Repository:</strong> (add GitHub link)
+</p>
 
-  <h2>1. App name and one-sentence description</h2>
-  <p><strong>Name:</strong> GreenWeekend</p>
-  <p><strong>Description:</strong> GreenWeekend helps weekend dacha owners keep their greenhouse healthy between Friday and Sunday visits.</p>
+<h2>1. App name and description</h2>
+<p><strong>Name:</strong> GreenWeekend</p>
+<p><strong>One sentence:</strong> GreenWeekend helps weekend dacha owners keep their greenhouse healthy between Friday and Sunday visits.</p>
 
-  <h2>2. Target user</h2>
-  <p>
-    Our primary user is a family that keeps a small vegetable greenhouse at a dacha (for example near a city in Kazakhstan)
-    and lives in the city during the work week. They usually visit only on weekends. Midweek they cannot check sensors;
-    beginners also struggle with what to plant, when to water, and how much harvest to expect.
-  </p>
-  <p>
-    They need a simple phone app for live status, remote control, plant advice, reminders, and a rough harvest estimate —
-    not complex farm software. Secondary users are family members on shared greenhouse accounts.
-  </p>
+<h2>2. Target user</h2>
+<p>
+  We focus on a family that has a small greenhouse at the dacha and lives in the city most of the week.
+  They usually come on Friday or Saturday and leave on Sunday. During the week nobody is there to check
+  temperature, soil moisture or if the ventilation was left open.
+</p>
+<p>
+  Because of that, plants often dry out or overheat before the next weekend. Many of these people are not
+  professional farmers. They forget watering and planting dates, do not know which crops fit the season,
+  and want a simple answer: is the greenhouse OK, and what should we do next. Other family members may
+  use the same app on their phones.
+</p>
 
-  <h2>3. Own extra feature</h2>
-  <p><strong>Plant Guide (Справочник и уход)</strong></p>
-  <p class="formula">
-    Our app can give planting recommendations, a plant handbook, care reminders, an approximate harvest estimate,
-    and a photo diary with health tags because our user is often a beginner who visits only on weekends and needs
-    clear advice, not only sensor numbers.
-  </p>
-  <ol>
-    <li><strong>Handbook</strong> — tomato, cucumber, pepper, greens: ideal ranges and short care tips.</li>
-    <li><strong>Recommended plantings</strong> — by season/month for a typical dacha greenhouse.</li>
-    <li><strong>Reminders</strong> — watering, planting, harvest windows.</li>
-    <li><strong>Harvest estimate</strong> — crop + plant count → approximate yield range (simple tables, not AI).</li>
-    <li><strong>Photo diary</strong> — photo + tags (OK / yellow leaves / pests). Full AI disease detection is out of scope for 6 weeks.</li>
-  </ol>
-  <p>This is not a copy of M1–M8: it is the educational / planning layer on top of required modules.</p>
+<h2>3. Our extra feature</h2>
+<p><strong>Plant Guide</strong></p>
+<p>
+  Our app can show a plant handbook, planting recommendations, care reminders, a rough harvest estimate,
+  and a photo diary with simple health tags because our user comes only on weekends and often needs basic
+  advice, not only sensor numbers.
+</p>
+<p>What we plan to build:</p>
+<ul>
+  <li>Handbook for common crops (tomato, cucumber, pepper, greens) with short care tips and normal ranges for temperature and moisture.</li>
+  <li>Recommended plantings by month for a typical dacha greenhouse.</li>
+  <li>Reminders for watering, planting and harvest time.</li>
+  <li>Approximate harvest: user enters the crop and how many plants, the app shows a rough yield range from simple reference values.</li>
+  <li>Photo diary: user adds a photo and marks the plant as OK, yellow leaves, pests, or other. The app does not recognize diseases from the photo by itself.</li>
+</ul>
+<p>
+  Plant Guide is separate from the required modules. Login, dashboard, control, automation, alerts,
+  history, settings and offline mode stay as required. Plant Guide is the advice and planning part for the same user.
+</p>
 
-  <h2>4. Direction (track)</h2>
-  <ol>
-    <li><strong>Beginner-friendly UX / education</strong> — handbook, recommendations, plain-language reminders.</li>
-    <li><strong>Water-conscious automation</strong> — irrigate when soil is low; reminders discourage overwatering.</li>
-  </ol>
+<h2>4. Direction</h2>
+<ol>
+  <li>Easy to use for beginners who are not farmers (clear texts, handbook, reminders).</li>
+  <li>Careful with water (automatic irrigation only when soil is dry enough; reminders not to overwater).</li>
+</ol>
 
-  <h2>5. Feature list — M1–M8</h2>
-  <table>
-    <thead>
-      <tr><th>ID</th><th>Module</th><th>How it works in GreenWeekend</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>M1</td><td>Login</td><td>Firebase Auth; wrong password error; each account sees only their greenhouse.</td></tr>
-      <tr><td>M2</td><td>Dashboard</td><td>Air temp, humidity, soil moisture, light, last update; live from Firebase.</td></tr>
-      <tr><td>M3</td><td>Control</td><td>Irrigation, ventilation, lighting; tap writes on/off; UI confirms.</td></tr>
-      <tr><td>M4</td><td>Modes</td><td>Manual / automatic; e.g. soil below threshold → irrigation on.</td></tr>
-      <tr><td>M5</td><td>Alerts</td><td>In-app alert when a value leaves the allowed range.</td></tr>
-      <tr><td>M6</td><td>History</td><td>Charts for ≥2 parameters; day / week.</td></tr>
-      <tr><td>M7</td><td>Settings</td><td>Thresholds, schedule, units; used by automation.</td></tr>
-      <tr><td>M8</td><td>No internet</td><td>Clear message; no crash; recovers when online.</td></tr>
-    </tbody>
-  </table>
+<h2>5. Feature list M1–M8</h2>
+<p><strong>M1 Login.</strong> Email and password. Wrong password shows an error. Logout works. Each user sees only their own greenhouse.</p>
+<p><strong>M2 Dashboard.</strong> Air temperature, air humidity, soil moisture, light, and time of last update. Values update when data in the database changes.</p>
+<p><strong>M3 Control.</strong> Buttons for irrigation, ventilation and lighting. A press changes the device state in the database, and the app shows the new state.</p>
+<p><strong>M4 Modes.</strong> Manual and automatic. In automatic mode a rule works, for example: soil moisture below the set threshold turns irrigation on.</p>
+<p><strong>M5 Alerts.</strong> If a value goes outside the allowed range (for example 45 °C), the app shows an alert with clear text.</p>
+<p><strong>M6 History.</strong> Charts for at least two parameters. User can choose day or week.</p>
+<p><strong>M7 Settings.</strong> User can change thresholds, a simple schedule and units. Automation uses the new values.</p>
+<p><strong>M8 No internet.</strong> The app shows that there is no connection, does not crash, and works again when the internet returns.</p>
 
-  <h2>6. Team setup</h2>
-  <ul>
-    <li>GitHub repository with all four members as collaborators.</li>
-    <li>README lists names and roles.</li>
-  </ul>
+<h2>6. Team and roles</h2>
+<table>
+  <tr><th>Name</th><th>Role</th></tr>
+  <tr><td>Zholgali Dias</td><td>Team lead, app control and automation</td></tr>
+  <tr><td>Basiev David</td><td>Design (Figma, logo, style)</td></tr>
+  <tr><td>Umbetalieva Adelya</td><td>Data and Firebase</td></tr>
+  <tr><td>Marat Gaukhar</td><td>Plant Guide, history charts, documents</td></tr>
+</table>
+<p>All members are added to the GitHub repository. Roles are also listed in the README.</p>
 
-  <h2>7. Out of scope</h2>
-  <p>No hardware. Test data in Firebase/Supabase. No full AI plant-disease model in 6 weeks.</p>
-
-  <p style="margin-top:1.5em; font-size:9pt; color:#666;">
-    Tip: Chrome → Print → Save as PDF.
-  </p>
 </body>
 </html>
