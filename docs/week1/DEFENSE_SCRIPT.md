@@ -14,34 +14,41 @@ Speak this order. Keep answers short.
 ### 2. Target user (≈1 min)
 
 > Our user is a family with a small greenhouse at the dacha. They live in the city and come only on weekends.  
-> Midweek nobody checks temperature or soil moisture. Plants overheat or dry out, and they notice only on Saturday.  
-> They do not need farm software — they need a simple phone app: live status, remote control, and help while they are away.
+> Midweek nobody checks sensors. Beginners also do not know what to plant, when to water, or how much harvest to expect.  
+> They need live monitoring and simple plant advice on the phone.
 
 ---
 
 ### 3. Extra feature (≈1–1.5 min)
 
-> Our own feature is **Away Plan**.  
-> **Our app can build a short away plan for several days — stricter thresholds, automatic mode, and a return summary — because our user leaves the greenhouse alone from Monday to Friday.**  
-> Before leaving, they set when they return. The app turns on automatic rules. When they come back, they see what happened (alerts, irrigation counts).  
-> Directions: beginner-friendly UX + water-conscious automation.
+> Our own feature is **Plant Guide**.  
+> **Our app can give planting recommendations, a plant handbook, care reminders, an approximate harvest estimate, and a photo diary with health tags because our user is often a beginner who visits only on weekends.**  
+> Handbook + season tips + reminders + simple yield estimate. Photos with tags (OK / yellow leaves / pests) — not full AI, so we can finish it in 6 weeks.  
+> Directions: beginner education UX + water-conscious automation.
 
 ---
 
 ### 4. GitHub (≈1 min)
 
-1. Open the repository in the browser.  
-2. Show **Collaborators** / members — everyone is added.  
-3. Open **README** — table with names and roles.
+1. Open the repository.  
+2. Show all four members as collaborators: Dias, David, Adelya, Gaukhar.  
+3. Open **README** — roles table.
+
+| Who | Role |
+|-----|------|
+| Zholgali Dias | Lead · Firebase / data |
+| Basiev David | Control & automation |
+| Umbetalieva Adelya | Design / Figma |
+| Marat Gaukhar | Plant Guide, charts, docs |
 
 ---
 
-## Likely questions (every member must be ready)
+## Likely questions
 
 | Question | Short answer |
 |----------|----------------|
-| Why would your user need this app? | They are away all week; without remote monitoring and auto rules, plants die between visits. |
-| How is your app different? | Focus on weekend dacha owners + Away Plan workflow, not a generic farm dashboard. |
-| Who is responsible for what? | Point to the README roles table. |
-| Is Away Plan the same as automation? | No — Away Plan is a guided mode that configures automation/alerts for the absence period and shows a return summary. |
-| What stack will you use? | Flutter + Firebase (final choice confirmed in Week 2). |
+| Why would your user need this app? | Away all week + beginner questions about plants, watering, harvest. |
+| How is your app different? | Sensor control (required) plus Plant Guide for dacha beginners. |
+| Who is responsible for what? | Point to the README table. |
+| Will you detect diseases from photos with AI? | Not in 6 weeks — photo diary with manual condition tags; AI could be future work. |
+| How do you estimate harvest? | Simple reference yields × number of plants / beds — approximate range, not a lab forecast. |

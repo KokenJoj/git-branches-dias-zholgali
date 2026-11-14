@@ -10,12 +10,12 @@ Mobile app only (no hardware). Greenhouse readings live in Firebase; test values
 
 | Name | GitHub | Role | Responsibility |
 |------|--------|------|----------------|
-| Диас | _add username_ | Team lead · Data / Firebase | Project charter, database schema, auth, live readings |
-| _Имя 2_ | _add username_ | Design · UI | Figma, logo, style, screens matching mockups |
-| _Имя 3_ | _add username_ | App · Features | Navigation, device control, automation, alerts |
-| _Имя 4 (optional)_ | _add username_ | Extra feature · Docs | Away Plan, README, demo video, presentation |
+| Zholgali Dias | _add username_ | Team lead · Data / Firebase | Charter, database schema, auth, live readings, settings |
+| Basiev David | _add username_ | App · Control & automation | Navigation, device control (M3), modes (M4), offline (M8) |
+| Umbetalieva Adelya | _add username_ | Design · UI | Figma, logo, colors, fonts, screens match mockups |
+| Marat Gaukhar | _add username_ | Extra feature · History & docs | Plant Guide, charts (M6), alerts (M5), README, video, presentation |
 
-> Replace `_Имя N_` and GitHub usernames before the Week 1 defense. Add every member as a collaborator on this repository.
+> Add every member as a collaborator on this repository. Fill GitHub usernames before the defense.
 
 ---
 
@@ -23,13 +23,14 @@ Mobile app only (no hardware). Greenhouse readings live in Firebase; test values
 
 - [Project charter (Week 1)](docs/week1/PROJECT_CHARTER.md)
 - [Defense script](docs/week1/DEFENSE_SCRIPT.md)
+- Printable PDF source: [PROJECT_CHARTER.html](docs/week1/PROJECT_CHARTER.html)
 
 ---
 
 ## Planned stack (Week 2+)
 
 - **Flutter** — one codebase for Android APK required by Week 6
-- **Firebase** — Auth + Firestore (readings, devices, settings, history)
+- **Firebase** — Auth + Firestore (readings, devices, settings, history, plant guide data)
 
 ---
 
@@ -46,7 +47,7 @@ Mobile app only (no hardware). Greenhouse readings live in Firebase; test values
 | M7 Settings | Thresholds, schedule, units; used by automation |
 | M8 Offline | Clear “no connection” message; recover when online |
 
-**Extra feature:** Away Plan — see the charter.
+**Extra feature:** Plant Guide — handbook, planting tips, care reminders, harvest estimate, photo diary (manual condition tags). See the charter.
 
 ---
 
