@@ -2,7 +2,7 @@
 
 GreenWeekend helps weekend dacha owners keep their greenhouse healthy between Friday and Sunday visits.
 
-This is a mobile app for the Smart Greenhouse course. There is no hardware. Sensor values and device states are stored in Firebase and changed in the console for tests and demos.
+This is a mobile app for the Smart Greenhouse course. There is no hardware. The app in `app/` runs in the browser and keeps each person's greenhouse on their phone. A Firebase service file is ready for a later connection.
 
 ## Team
 
@@ -21,9 +21,9 @@ Add all members as collaborators on GitHub.
 - Defense notes: `docs/week1/DEFENSE_SCRIPT.md`
 - For PDF: open `docs/week1/PROJECT_CHARTER.html` in the browser and print to PDF
 
-## Stack (planned)
+## Stack
 
-Flutter and Firebase.
+React, TypeScript, and Vite. Open it on a phone or in a narrow browser window.
 
 ## Modules
 
@@ -40,4 +40,10 @@ Flutter and Firebase.
 
 ## How to run
 
-Will be filled in week 3, when the app skeleton is ready.
+```bash
+cd app
+npm install
+npm run dev
+```
+
+Open the address Vite prints (usually http://127.0.0.1:5173/). Create an account, then pair a greenhouse with any code, for example `DW-12`.

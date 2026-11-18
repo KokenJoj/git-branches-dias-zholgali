@@ -24,6 +24,7 @@ build/
 
 # Node / misc
 node_modules/
+dist/
 .DS_Store
 Thumbs.db
 *.log

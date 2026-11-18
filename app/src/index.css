@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --color-canvas: #f5f5f2;
+  --color-card: #ffffff;
+  --color-tint: #f9f6ee;
+  --color-hairline: #e6e8e4;
+  --color-forest: #1f4e3d;
+  --color-mint: #e8efea;
+  --color-terracotta: #c84b31;
+  --color-amber: #d97706;
+  --color-ok: #2d6a4f;
+  --color-ink: #18181b;
+  --color-muted: #6b7280;
+  --color-disabled: #9ca3af;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #e4e2dc;
+  color: #18181b;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid #1f4e3d;
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
