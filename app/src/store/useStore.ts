@@ -1,10 +1,19 @@
 import { create } from "zustand";
 import type { DeviceKey, Estimate, Greenhouse, Mode, PersistedData, PhotoEntry, Reminder, Schedule, Thresholds, Unit } from "../types";
 import { connectionAlert, createGreenhouse, reconcile, setDeviceState } from "../lib/greenhouse";
-import { api, ServiceError } from "../services";
+import {
+  api,
+  bootstrapFirebaseSession,
+  ensureSeedGreenhouse,
+  removeGreenhouse,
+  ServiceError,
+  subscribeGreenhouse,
+  useFirebase,
+} from "../services";
 
 interface Store {
   data: PersistedData;
+  ready: boolean;
   signUp: (input: { name: string; email: string; password: string }) => Promise<void>;
   signIn: (input: { email: string; password: string }) => Promise<void>;
   signOut: () => Promise<void>;
@@ -23,6 +32,7 @@ interface Store {
   addPhoto: (photo: Omit<PhotoEntry, "id" | "at">) => void;
   deletePhoto: (id: string) => void;
   tick: () => void;
+  hydrate: (data: PersistedData) => void;
 }
 
 function requireUser(data: PersistedData) {
@@ -45,52 +55,92 @@ function withGreenhouse(data: PersistedData, recipe: (greenhouse: Greenhouse) =>
 
 export const useStore = create<Store>((set, get) => ({
   data: api.load(),
+  ready: !useFirebase,
+  hydrate(data) {
+    set({ data, ready: true });
+  },
   async signUp(input) {
     const created = await api.signUp(get().data, input);
-    const next = { ...get().data, users: created.users, sessionUserId: created.sessionUserId };
-    set({ data: next });
-    api.persist(next);
+    set({
+      data: {
+        ...get().data,
+        users: created.users,
+        sessionUserId: created.sessionUserId,
+        greenhouses: created.greenhouses ?? get().data.greenhouses,
+        online: created.online ?? get().data.online,
+      },
+    });
   },
   async signIn(input) {
     const authed = await api.signIn(get().data, input);
-    const next = { ...get().data, users: authed.users, sessionUserId: authed.sessionUserId };
-    set({ data: next });
-    api.persist(next);
+    set({
+      data: {
+        ...get().data,
+        users: authed.users,
+        sessionUserId: authed.sessionUserId,
+        greenhouses: authed.greenhouses ?? {},
+        online: authed.online ?? get().data.online,
+      },
+    });
   },
   async signOut() {
     await api.signOut(get().data);
-    const next = { ...get().data, sessionUserId: null };
-    set({ data: next });
-    api.persist(next);
+    set({ data: { ...get().data, sessionUserId: null, users: useFirebase ? [] : get().data.users, greenhouses: useFirebase ? {} : get().data.greenhouses } });
   },
   async pair(input) {
     const code = input.code.trim();
     const name = input.name.trim() || "Dacha No. 12";
     if (code.length < 3) throw new ServiceError("invalid", "Enter the code from the controller.");
+    const userId = requireUser(get().data);
+
+    if (useFirebase) {
+      const greenhouse = await ensureSeedGreenhouse(userId, name, code);
+      set({
+        data: {
+          ...get().data,
+          greenhouses: { ...get().data.greenhouses, [userId]: greenhouse },
+        },
+      });
+      return;
+    }
+
     commit(set, get, (data) => {
-      const userId = requireUser(data);
       const greenhouse = reconcile(createGreenhouse(name, code, Date.now()), Date.now(), false);
       return { ...data, greenhouses: { ...data.greenhouses, [userId]: greenhouse } };
     });
   },
   unpair() {
+    const userId = get().data.sessionUserId;
     commit(set, get, (data) => {
-      const userId = requireUser(data);
+      if (!userId) return data;
       const greenhouses = { ...data.greenhouses };
       delete greenhouses[userId];
       return { ...data, greenhouses };
     });
+    if (useFirebase && userId) {
+      void removeGreenhouse(userId).catch(() => undefined);
+    }
   },
   setMode(mode) {
     commit(set, get, (data) => {
       if (!data.online) return data;
-      return withGreenhouse(data, (greenhouse) => reconcile({ ...greenhouse, mode }, Date.now(), false));
+      return withGreenhouse(data, (greenhouse) =>
+        useFirebase ? { ...greenhouse, mode } : reconcile({ ...greenhouse, mode }, Date.now(), false),
+      );
     });
   },
   setDevice(key, value) {
     commit(set, get, (data) => {
       if (!data.online) return data;
-      return withGreenhouse(data, (greenhouse) => setDeviceState(greenhouse, key, value, Date.now()));
+      return withGreenhouse(data, (greenhouse) =>
+        useFirebase
+          ? {
+              ...greenhouse,
+              devices: { ...greenhouse.devices, [key]: value },
+              mode: "manual",
+            }
+          : setDeviceState(greenhouse, key, value, Date.now()),
+      );
     });
   },
   setThresholds(thresholds) {
@@ -103,6 +153,7 @@ export const useStore = create<Store>((set, get) => ({
             maxTempC: Math.min(50, Math.max(10, thresholds.maxTempC)),
           },
         };
+        if (useFirebase) return next;
         return data.online ? reconcile(next, Date.now(), false) : next;
       }),
     );
@@ -164,6 +215,7 @@ export const useStore = create<Store>((set, get) => ({
     );
   },
   tick() {
+    if (useFirebase) return;
     const data = get().data;
     if (!data.online || !data.sessionUserId) return;
     const greenhouse = data.greenhouses[data.sessionUserId];
@@ -187,9 +239,11 @@ function notifyNew(previous: PersistedData, next: PersistedData) {
     const prior = before.alerts.find((item) => item.id === alert.id);
     if (alert.status === "active" && prior?.status !== "active") {
       try {
-        new Notification("GreenWeekend", { body: alert.kind === "heat" ? "The greenhouse is above your temperature limit." : "A greenhouse alert needs a look." });
+        new Notification("GreenWeekend", {
+          body: alert.kind === "heat" ? "The greenhouse is above your temperature limit." : "A greenhouse alert needs a look.",
+        });
       } catch {
-        // Notifications are optional.
+        // ignore
       }
     }
   }
@@ -197,9 +251,10 @@ function notifyNew(previous: PersistedData, next: PersistedData) {
 
 export function useSession() {
   const data = useStore((state) => state.data);
+  const ready = useStore((state) => state.ready);
   const user = data.users.find((item) => item.id === data.sessionUserId) ?? null;
   const greenhouse = user ? data.greenhouses[user.id] ?? null : null;
-  return { user, greenhouse, online: data.online };
+  return { user, greenhouse, online: data.online, ready };
 }
 
 export function startEngine() {
@@ -208,15 +263,47 @@ export function startEngine() {
     __greenweekendTick?: () => void;
     __greenweekendOnline?: (online: boolean) => void;
     __greenweekendTimer?: number;
+    __greenweekendBoot?: boolean;
   };
+
   holder.__greenweekendTick = () => useStore.getState().tick();
   holder.__greenweekendOnline = (online) => useStore.getState().setOnline(online);
-  if (holder.__greenweekendTimer) return;
-  holder.__greenweekendTimer = window.setInterval(() => holder.__greenweekendTick?.(), 2000);
-  window.addEventListener("offline", () => holder.__greenweekendOnline?.(false));
-  window.addEventListener("online", () => {
-    if (navigator.onLine) holder.__greenweekendOnline?.(true);
-  });
+
+  if (!holder.__greenweekendTimer) {
+    holder.__greenweekendTimer = window.setInterval(() => holder.__greenweekendTick?.(), 2000);
+    window.addEventListener("offline", () => holder.__greenweekendOnline?.(false));
+    window.addEventListener("online", () => {
+      if (navigator.onLine) holder.__greenweekendOnline?.(true);
+    });
+  }
+
+  if (holder.__greenweekendBoot) return;
+  holder.__greenweekendBoot = true;
+
+  if (useFirebase) {
+    void bootstrapFirebaseSession()
+      .then((session) => {
+        useStore.getState().hydrate(session);
+      })
+      .catch(() => {
+        useStore.getState().hydrate(api.load());
+      });
+
+    subscribeGreenhouse((greenhouse) => {
+      const state = useStore.getState();
+      const uid = state.data.sessionUserId;
+      if (!uid) return;
+      const previous = state.data;
+      const next: PersistedData = {
+        ...previous,
+        greenhouses: greenhouse
+          ? { ...previous.greenhouses, [uid]: greenhouse }
+          : Object.fromEntries(Object.entries(previous.greenhouses).filter(([key]) => key !== uid)),
+      };
+      useStore.setState({ data: next });
+      notifyNew(previous, next);
+    });
+  }
 }
 
 export async function enableNotifications() {

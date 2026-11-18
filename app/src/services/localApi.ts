@@ -27,9 +27,7 @@ export const localApi: GreenWeekendApi = {
   persist(data) {
     try {
       localStorage.setItem(KEY, JSON.stringify(data));
-    } catch {
-      // The session still works in memory if storage is full.
-    }
+    } catch {}
   },
   async signUp(data, input: SignUpInput) {
     await wait();
