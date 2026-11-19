@@ -1,73 +1,69 @@
-# Project Charter — GreenWeekend
+# Project Charter - GreenWeekend
 Smart Greenhouse, Week 1
 
 **Team:** Zholgali Dias, Basiev David, Umbetalieva Adelya, Marat Gaukhar  
-**Repository:** (add GitHub link)
+**Repository:** https://github.com/KokenJoj/git-branches-dias-zholgali/tree/greenweekend
 
 ---
 
-## App name and description
+## 1. App name and description
 
 **Name:** GreenWeekend
 
-**One sentence:** GreenWeekend helps weekend dacha owners keep their greenhouse healthy between Friday and Sunday visits.
+GreenWeekend is a mobile app for people who visit their dacha only on weekends. It helps them check the greenhouse while they are away and take care of plants when they come back on Friday-Sunday.
 
 ---
 
-## Target user
+## 2. Target user
 
-We focus on a family that has a small greenhouse at the dacha and lives in the city most of the week. They usually come on Friday or Saturday and leave on Sunday. During the week nobody is there to check temperature, soil moisture or if the ventilation was left open.
+Our main user is a family with a small greenhouse at the dacha. They live in the city during the week and usually arrive on Friday or Saturday and leave on Sunday. Nobody watches the greenhouse on weekdays, so they cannot check temperature, soil moisture, or whether the windows were left open.
 
-Because of that, plants often dry out or overheat before the next weekend. Many of these people are not professional farmers. They forget watering and planting dates, do not know which crops fit the season, and want a simple answer: is the greenhouse OK, and what should we do next. Other family members may use the same app on their phones.
-
----
-
-## Our extra feature
-
-**Plant Guide**
-
-Our app can show a plant handbook, planting recommendations, care reminders, a rough harvest estimate, and a photo diary with simple health tags because our user comes only on weekends and often needs basic advice, not only sensor numbers.
-
-What we plan to build:
-
-- Handbook for common crops (tomato, cucumber, pepper, greens) with short care tips and normal ranges for temperature and moisture.
-- Recommended plantings by month for a typical dacha greenhouse.
-- Reminders for watering, planting and harvest time.
-- Approximate harvest: user enters the crop and how many plants, the app shows a rough yield range from simple reference values.
-- Photo diary: user adds a photo and marks the plant as OK, yellow leaves, pests, or other. The app does not recognize diseases from the photo by itself.
-
-Plant Guide is separate from the required modules. Login, dashboard, control, automation, alerts, history, settings and offline mode stay as required. Plant Guide is the advice and planning part for the same user.
+Because of this, plants often dry out or get too hot before the next visit. These users are not farmers - they forget watering dates, are unsure which crops to plant when, and mostly want a simple answer: is the greenhouse OK and what should we do this weekend. Other family members may also open the same account from their phones.
 
 ---
 
-## Direction
+## 3. Extra feature - Plant Guide
 
-1. Easy to use for beginners who are not farmers (clear texts, handbook, reminders).
-2. Careful with water (automatic irrigation only when soil is dry enough; reminders not to overwater).
+Besides sensors and control, we add a Plant Guide. Weekend visitors need short advice, not only numbers on the dashboard. In Plant Guide we plan:
 
----
+- Handbook for tomato, cucumber, pepper and greens - short tips and normal ranges for temperature and moisture.
+- What to plant by month in a typical dacha greenhouse.
+- Reminders for watering, planting and harvest.
+- Rough harvest estimate: user picks a crop and number of plants, app shows an approximate yield from simple reference values.
+- Photo diary: user uploads a photo and tags the plant (OK, yellow leaves, pests, other). No automatic disease detection from photos.
 
-## Feature list M1–M8
-
-**M1 Login.** Email and password. Wrong password shows an error. Logout works. Each user sees only their own greenhouse.
-
-**M2 Dashboard.** Air temperature, air humidity, soil moisture, light, and time of last update. Values update when data in the database changes.
-
-**M3 Control.** Buttons for irrigation, ventilation and lighting. A press changes the device state in the database, and the app shows the new state.
-
-**M4 Modes.** Manual and automatic. In automatic mode a rule works, for example: soil moisture below the set threshold turns irrigation on.
-
-**M5 Alerts.** If a value goes outside the allowed range (for example 45 °C), the app shows an alert with clear text.
-
-**M6 History.** Charts for at least two parameters. User can choose day or week.
-
-**M7 Settings.** User can change thresholds, a simple schedule and units. Automation uses the new values.
-
-**M8 No internet.** The app shows that there is no connection, does not crash, and works again when the internet returns.
+Plant Guide is our team's own feature. Required modules stay the same: login, dashboard, control, automation, alerts, history, settings and offline mode.
 
 ---
 
-## Team and roles
+## 4. Direction
+
+1. Keep the UI simple for beginners (clear texts, handbook, reminders).
+2. Save water - auto irrigation only when soil is dry enough; reminders not to overwater.
+
+---
+
+## 5. Feature list M1-M8
+
+**M1 Login.** Email + password. Error on wrong password. Logout. Each user sees only their greenhouse.
+
+**M2 Dashboard.** Shows air temperature, humidity, soil moisture, light and last update time. Values refresh when data changes.
+
+**M3 Control.** Buttons for irrigation, ventilation and lighting. Press updates device state in the database and in the UI.
+
+**M4 Modes.** Manual and automatic. In auto mode a rule runs, e.g. irrigate when soil moisture falls below the threshold.
+
+**M5 Alerts.** If a value goes out of range (e.g. 45 C), the app shows a clear alert.
+
+**M6 History.** Charts for at least two parameters. Day / week view.
+
+**M7 Settings.** Change thresholds, a simple schedule and units. Automation uses the new values.
+
+**M8 Offline.** If there is no internet, the app shows it, does not crash, and continues when connection returns.
+
+---
+
+## 6. Team and roles
 
 | Name | Role |
 |------|------|
@@ -76,4 +72,4 @@ Plant Guide is separate from the required modules. Login, dashboard, control, au
 | Umbetalieva Adelya | Data and Firebase |
 | Marat Gaukhar | Plant Guide, history charts, documents |
 
-All members are added to the GitHub repository. Roles are also listed in the README.
+Everyone is added to the GitHub repo. The same roles are listed in the README.
